@@ -39,6 +39,10 @@ struct strings *strings;
 #define DW_TAG_GNU_call_site_parameter 0x410a
 #endif
 
+#ifndef DW_TAG_GNU_template_template_parameter
+#define DW_TAG_GNU_template_template_parameter 0x4106
+#endif
+
 #define hashtags__fn(key) hash_64(key, HASHTAGS__BITS)
 
 static void __tag__print_not_supported(uint32_t tag, const char *func)
@@ -1475,6 +1479,7 @@ static int die__process_function(Dwarf_Die *die, struct ftype *ftype,
 			continue;
 		case DW_TAG_template_type_parameter:
 		case DW_TAG_template_value_parameter:
+		case DW_TAG_GNU_template_template_param:
 			/* FIXME: probably we'll have to attach this as a list of
  			 * template parameters to use at class__fprintf time... 
  			 * See die__process_class */
